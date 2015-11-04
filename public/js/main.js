@@ -225,14 +225,14 @@ function renderOrders(orders){
 	// loop through all the animals and add them in the animal-holder div
 	for(var i=0;i<orders.length;i++){
 		var htmlToAdd = '<div class="col-md-4 order">'+
-			'<h1 class="name">'+orders[i].orderNumber+'</h1>'+
+			'<h2 class="name">'+orders[i].orderNumber+'</h2>'+
 			'<ul>'+
 				'<li>Name: <span class="name">'+orders[i].name+'</span></li>'+
 				'<li>email: <span class="email">'+orders[i].email+'</span></li>'+
-				'<li>lineitem1: <span class="lineitem1">'+orders[i].lineitem1+'</span></li>'+
-				'<li>lineitem2: <span class="lineitem2">'+orders[i].lineitem2+'</span></li>'+				
-				'<li>lineitem3: <span class="lineitem3">'+orders[i].lineitem3+'</span></li>'+
-				'<li>lineitem4: <span class="lineitem4">'+orders[i].lineitem4+'</span></li>'+
+				'<li>lineitem1: <span class="lineitem1">'+orders[i].lineItem1+'</span></li>'+
+				'<li>lineitem2: <span class="lineitem2">'+orders[i].lineItem2+'</span></li>'+				
+				'<li>lineitem3: <span class="lineitem3">'+orders[i].lineItem3+'</span></li>'+
+				'<li>lineitem4: <span class="lineitem4">'+orders[i].lineItem4+'</span></li>'+
 				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+
 				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
 								
@@ -259,10 +259,10 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
   var email = $(parent).find('.email').text();
   var orderNumber = $(parent).find('.orderNumber').text();
   var customerTags = $(parent).find('.tags').text();
-  var lineitem1 = $(parent).find('.lineitem1').text();
-  var lineitem2 = $(parent).find('.lineitem2').text();
-  var lineitem3 = $(parent).find('.lineitem3').text();
-  var lineitem4 = $(parent).find('.lineitem4').text();
+  var lineitem1 = $(parent).find('.lineItem1').text();
+  var lineitem2 = $(parent).find('.lineItem2').text();
+  var lineitem3 = $(parent).find('.lineItem3').text();
+  var lineitem4 = $(parent).find('.lineItem4').text();
   var totalCost = $(parent).find('.totalCost').text();
   //var url = $(parent).find('.url').attr('src');
   var location = $(parent).find('.location').text();
