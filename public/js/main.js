@@ -21,7 +21,7 @@ function init() {
 
 // add form button event
 // when the form is submitted (with a new animal), the below runs
-jQuery("#addForm").submit(function(e){
+jQuery("#submit-button").click(function(e){
 
 	// first, let's pull out all the values
 	// the name form field value
