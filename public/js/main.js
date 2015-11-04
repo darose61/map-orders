@@ -62,7 +62,7 @@ jQuery("#submit-button").click(function(e){
   		name: name,
       	email: email,
       	orderNumber: orderNumber,
-      	customerTags: Customertags,
+      	customerTags: customerTags,
       	lineitem1: lineitem1,
       	lineitem2: lineitem2,
       	lineitem3: lineitem3,
