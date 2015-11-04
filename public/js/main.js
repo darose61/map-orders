@@ -225,18 +225,17 @@ function renderOrders(orders){
 	// loop through all the animals and add them in the animal-holder div
 	for(var i=0;i<orders.length;i++){
 		var htmlToAdd = '<div class="col-md-4 order">'+
-			'<img class="url" src="'+orders[i].url+'">'+
-			'<h1 class="name">'+orders[i].name+'</h1>'+
+			'<h1 class="name">'+orders[i].orderNumber+'</h1>'+
 			'<ul>'+
-				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+
+				'<li>Name: <span class="name">'+orders[i].name+'</span></li>'+
 				'<li>email: <span class="email">'+orders[i].email+'</span></li>'+
-				'<li>name: <span class="name">'+orders[i].name+'</span></li>'+
-				'<li>orderNumber: <span class="weight">'+orders[i].orderNumber+'</span></li>'+
-				'<li>Tags: <span class="tags">'+orders[i].tags+'</span></li>'+
 				'<li>lineitem1: <span class="lineitem1">'+orders[i].lineitem1+'</span></li>'+
 				'<li>lineitem2: <span class="lineitem2">'+orders[i].lineitem2+'</span></li>'+				
 				'<li>lineitem3: <span class="lineitem3">'+orders[i].lineitem3+'</span></li>'+
-				'<li>lineitem4: <span class="lineitem4">'+orders[i].lineitem4+'</span></li>'+				
+				'<li>lineitem4: <span class="lineitem4">'+orders[i].lineitem4+'</span></li>'+
+				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+
+				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
+								
 				'<li class="hide id">'+orders[i]._id+'</li>'+
 			'</ul>'+
 			'<button type="button" id="'+orders[i]._id+'" onclick="deleteOrder(event)">Delete Order</button>'+
