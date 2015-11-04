@@ -44,7 +44,7 @@ router.post('/api/create', function(req, res){
     var name = req.body.name;
     var email = req.body.email;
     var orderNumber = req.body.orderNumber;
-    var CustomerTags = req.body.tags.split(","); // split string into array
+    var customerTags = req.body.customerTags.split(","); // split string into array
     var lineitem1 = req.body.lineitem1;
     var lineitem2 = req.body.lineitem2;
     var lineitem3 = req.body.lineitem3;
@@ -59,7 +59,7 @@ router.post('/api/create', function(req, res){
       name: name,
       email: email,
       orderNumber: orderNumber,
-      customerTags: Customertags,
+      customerTags: CustomerTags,
       lineitem1: lineitem1,
       lineitem2: lineitem2,
       lineitem3: lineitem3,
