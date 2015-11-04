@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pets of NYC</title>
+    <title>TVP Market Orders</title>
 
     <!-- Custom Font - Change 'Muli' to the font you want -->
     <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
@@ -24,12 +24,12 @@
     <![endif]-->
   </head>
   <body>
-  <div id="map-canvas"></div>
+  
 
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h1>Add a New Pet</h1>
+        <h1>Add a New Order</h1>
         <form class="form-horizontal" id="addForm">
           <div class="form-group">
             <label for="name" class="col-sm-2 control-label">Name</label>
@@ -38,35 +38,53 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="age" class="col-sm-2 control-label">Age</label>
+            <label for="age" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="age" placeholder="Age" name="age" required>
+              <input type="text" class="form-control" id="age" placeholder="Email" name="email" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="tags" class="col-sm-2 control-label">Tags</label>
+            <label for="Customertags" class="col-sm-2 control-label">Customer Tags</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="tags" placeholder="Tags (separated by comma)" name="tags" required>
             </div>
           </div> 
           <div class="form-group">
-            <label for="breed" class="col-sm-2 control-label">Breed</label>
+            <label for="lineitem1" class="col-sm-2 control-label">Line Item 1</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="breed" placeholder="Breed" name="breed" required>
+              <input type="text" class="form-control" id="breed" placeholder="Line Item 1" name="line Item 1" required>
+            </div>
+          </div>
+           <div class="form-group">
+            <label for="lineitem2" class="col-sm-2 control-label">Line Item 2</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="breed" placeholder="Line Item 2" name="line Item 2" >
+            </div>
+          </div>
+           <div class="form-group">
+            <label for="lineitem3" class="col-sm-2 control-label">Line Item 3</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="breed" placeholder="Line Item 3" name="line Item 3">
+            </div>
+          </div>
+           <div class="form-group">
+            <label for="lineitem4" class="col-sm-2 control-label">Line Item 4</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="breed" placeholder="Line Item 4" name="line Item 4">
             </div>
           </div>
           <div class="form-group">
-            <label for="weight" class="col-sm-2 control-label">Weight</label>
+            <label for="totalCost" class="col-sm-2 control-label">Total Cost</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="weight" placeholder="Weight" name="weight" required>
+              <input type="text" class="form-control" id="totalCost" placeholder="Total Cost" name="totalCost" required>
             </div>
           </div>
-          <div class="form-group">
+         <!--  <div class="form-group">
             <label for="url" class="col-sm-2 control-label">ImgURL</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="url" placeholder="PhotoURL" name="url" required>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="location" class="col-sm-2 control-label">Location</label>
             <div class="col-sm-10">
@@ -81,11 +99,12 @@
         </form>        
         
       </div>
-      <div class="col-md-8" id="animal-holder">
+      <div class="col-md-8" id="order-holder">
         
       </div>
     </div>
   </div>
+  <div id="map-canvas"></div>
 
   <!-- Edit Modal -->
   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -93,7 +112,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Edit an Animal</h4>
+          <h4 class="modal-title" id="myModalLabel">Edit an Order</h4>
         </div>
         <div class="modal-body">
           <form class="form-horizontal" id="editForm">
@@ -104,43 +123,61 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="age" class="col-sm-2 control-label">Age</label>
+              <label for="email" class="col-sm-2 control-label">Email</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="edit-age" placeholder="Age" name="age" required>
+                <input type="text" class="form-control" id="edit-email" placeholder="Email" name="email" required>
               </div>
             </div>
             <div class="form-group">
-              <label for="tags" class="col-sm-2 control-label">Tags</label>
+              <label for="Customertags" class="col-sm-2 control-label">Customer Tags</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="edit-tags" placeholder="Tags (separated by comma)" name="tags" required>
               </div>
             </div> 
             <div class="form-group">
-              <label for="breed" class="col-sm-2 control-label">Breed</label>
+              <label for="lineItem1" class="col-sm-2 control-label">LineItem 1</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="edit-breed" placeholder="Breed" name="breed" required>
+                <input type="text" class="form-control" id="edit-lineItem1" placeholder="lineItem 1" name="lineItem1" required>
               </div>
             </div>
             <div class="form-group">
-              <label for="weight" class="col-sm-2 control-label">Weight</label>
+              <label for="lineItem2" class="col-sm-2 control-label">LineItem 2</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="editWeight" placeholder="Weight" name="weight" required>
+                <input type="text" class="form-control" id="edit-lineItem2" placeholder="lineItem 2" name="lineItem2">
               </div>
             </div>
             <div class="form-group">
+              <label for="lineItem3" class="col-sm-2 control-label">LineItem 3</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="edit-lineItem3" placeholder="lineItem 3" name="lineItem3">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lineItem4" class="col-sm-2 control-label">LineItem 4</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="edit-lineItem4" placeholder="lineItem 4" name="lineItem4">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="totalCost" class="col-sm-2 control-label">Total Cost</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="editTotalCost" placeholder="Total Cost" name="totalClost" required>
+              </div>
+            </div>
+            <!-- <div class="form-group">
               <label for="url" class="col-sm-2 control-label">ImgURL</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="edit-url" placeholder="PhotoURL" name="url" required>
               </div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label for="location" class="col-sm-2 control-label">Location</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="edit-location" placeholder="Location" name="location" required>
               </div>
             </div>
-            <div class="form-group hide">
-              <label for="id" class="col-sm-2 control-label">ID</label>
+            <div class="form-group">
+              <label for="orderID" class="col-sm-2 control-label">Order ID</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="edit-id" placeholder="id" name="edit-id" required>
               </div>
@@ -172,11 +209,11 @@
     <script type="text/javascript">
       $("form").validate({
           rules: {
-            editWeight: {
+            editTotalCost: {
               required: true,
               number: true // must be a number
             },
-            weight: {
+            totalCost: {
               required: true,
               number: true // must be a number
             }

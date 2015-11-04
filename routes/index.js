@@ -4,7 +4,7 @@ var mongoose = require('mongoose'); // mongoDB library
 var geocoder = require('geocoder'); // geocoder library
 
 // our db model
-var Animal = require("../models/model.js");
+var Order = require("../models/model.js");
 
 /**
  * GET '/'
@@ -15,7 +15,7 @@ var Animal = require("../models/model.js");
 router.get('/', function(req, res) {
   
   var jsonData = {
-  	'name': 'pets-of-nyc',
+  	'name': 'geolocated-orders',
   	'api-status':'OK'
   }
 
@@ -24,8 +24,8 @@ router.get('/', function(req, res) {
 });
 
 // simple route to show the pets html
-router.get('/pets', function(req,res){
-  res.render('pets.html');
+router.get('/orders', function(req,res){
+  res.render('orders.html');
 })
 
 // /**
@@ -42,22 +42,30 @@ router.post('/api/create', function(req, res){
 
     // pull out the information from the req.body
     var name = req.body.name;
-    var age = req.body.age;
-    var tags = req.body.tags.split(","); // split string into array
-    var weight = req.body.weight;
-    var breed = req.body.breed;
-    var url = req.body.url;
+    var email = req.body.email;
+    var orderNumber = req.body.orderNumber;
+    var CustomerTags = req.body.tags.split(","); // split string into array
+    var lineitem1 = req.body.lineitem1;
+    var lineitem2 = req.body.lineitem2;
+    var lineitem3 = req.body.lineitem3;
+    var lineitem4 = req.body.lineitem4;
+    var totalCost = req.body.totalCost;
+    //var url = req.body.url;
     var location = req.body.location;
 
     // hold all this data in an object
     // this object should be structured the same way as your db model
-    var animalObj = {
+    var orderObj = {
       name: name,
-      age: age,
-      tags: tags,
-      weight: weight,
-      breed: breed,
-      url: url
+      email: email,
+      orderNumber: orderNumber,
+      customerTags: Customertags,
+      lineitem1: lineitem1,
+      lineitem2: lineitem2,
+      lineitem3: lineitem3,
+      lineitem4: lineitem4,
+      totalCost: totalCost,
+      location: location
     };
 
     // if there is no location, return an error
@@ -78,31 +86,31 @@ router.post('/api/create', function(req, res){
       var lat = data.results[0].geometry.location.lat;
 
       // now, let's add this to our animal object from above
-      animalObj.location = {
+      orderObj.location = {
         geo: [lon,lat], // need to put the geo co-ordinates in a lng-lat array for saving
         name: data.results[0].formatted_address // the location name
       }
 
       // now, let's save it to the database
       // create a new animal model instance, passing in the object we've created
-      var animal = new Animal(animalObj);
+      var order = new Order(orderObj);
 
       // now, save that animal instance to the database
       // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save    
-      animal.save(function(err,data){
+      order.save(function(err,data){
         // if err saving, respond back with error
         if (err){
-          var error = {status:'ERROR', message: 'Error saving animal'};
+          var error = {status:'ERROR', message: 'Error saving order'};
           return res.json(error);
         }
 
-        console.log('saved a new animal!');
+        console.log('saved a new order!');
         console.log(data);
 
         // now return the json data of the new animal
         var jsonData = {
           status: 'OK',
-          animal: data
+          order: data
         }
 
         return res.json(jsonData);
@@ -124,7 +132,7 @@ router.get('/api/get/:id', function(req, res){
   var requestedId = req.param('id');
 
   // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model.findById
-  Animal.findById(requestedId, function(err,data){
+  Order.findById(requestedId, function(err,data){
 
     // if err or no user found, respond with error 
     if(err || data == null){
@@ -135,7 +143,7 @@ router.get('/api/get/:id', function(req, res){
     // otherwise respond with JSON data of the animal
     var jsonData = {
       status: 'OK',
-      animal: data
+      order: data
     }
 
     return res.json(jsonData);
@@ -152,10 +160,10 @@ router.get('/api/get/:id', function(req, res){
 router.get('/api/get', function(req, res){
 
   // mongoose method to find all, see http://mongoosejs.com/docs/api.html#model_Model.find
-  Animal.find(function(err, data){
+  Order.find(function(err, data){
     // if err or no animals found, respond with error 
     if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find animals'};
+      var error = {status:'ERROR', message: 'Could not find orders'};
       return res.json(error);
     }
 
@@ -163,7 +171,7 @@ router.get('/api/get', function(req, res){
 
     var jsonData = {
       status: 'OK',
-      animals: data
+      orders: data
     } 
 
     res.json(jsonData);
@@ -187,7 +195,7 @@ router.post('/api/update/:id', function(req, res){
    var dataToUpdate = {}; // a blank object of data to update
 
     // pull out the information from the req.body and add it to the object to update
-    var name, age, weight, breed, url, location; 
+    var name, email, customerTags, lineitem1, lineitem2, lineitem3, lineitem4, totalCost, location; 
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
@@ -196,32 +204,47 @@ router.post('/api/update/:id', function(req, res){
       // add to object that holds updated data
       dataToUpdate['name'] = name;
     }
-    if(req.body.age) {
-      age = req.body.age;
+    if(req.body.email) {
+      email = req.body.email;
       // add to object that holds updated data
-      dataToUpdate['age'] = age;
+      dataToUpdate['email'] = email;
     }
-    if(req.body.weight) {
-      weight = req.body.weight;
+    // if(req.body.customerTags) {
+    //   customerTags = req.body.customerTags;
+    //   // add to object that holds updated data
+    //   dataToUpdate['customerTags'] = customerTags;
+    // }
+    if(req.body.lineitem1) {
+      lineitem1 = req.body.lineitem1;
       // add to object that holds updated data
-      dataToUpdate['weight'] = weight;
+      dataToUpdate['lineitem1'] = lineitem1;
     }
-    if(req.body.breed) {
-      breed = req.body.breed;
+     if(req.body.lineitem2) {
+      lineitem2 = req.body.lineitem2;
       // add to object that holds updated data
-      dataToUpdate['breed'] = breed;
+      dataToUpdate['lineitem2'] = lineitem2;
     }
-    if(req.body.url) {
-      url = req.body.url;
+     if(req.body.lineitem3) {
+      lineitem3 = req.body.lineitem3;
       // add to object that holds updated data
-      dataToUpdate['url'] = url;
+      dataToUpdate['lineitem3'] = lineitem3;
+    }
+     if(req.body.lineitem4) {
+      lineitem4 = req.body.lineitem4;
+      // add to object that holds updated data
+      dataToUpdate['lineitem4'] = lineitem4;
+    }
+    if(req.body.totalCost) {
+      totalCost = req.body.totalCost;
+      // add to object that holds updated data
+      dataToUpdate['totalCost'] = totalCost;
     }
 
-    var tags = []; // blank array to hold tags
-    if(req.body.tags){
-      tags = req.body.tags.split(","); // split string into array
+    var Customertags = []; // blank array to hold tags
+    if(req.body.customerTags){
+      customerTags = req.body.tags.split(","); // split string into array
       // add to object that holds updated data
-      dataToUpdate['tags'] = tags;
+      dataToUpdate['customerTags'] = customerTags;
     }
 
     if(req.body.location) {
@@ -255,20 +278,20 @@ router.post('/api/update/:id', function(req, res){
 
       // now, update that animal
       // mongoose method findByIdAndUpdate, see http://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate  
-      Animal.findByIdAndUpdate(requestedId, dataToUpdate, function(err,data){
+      Order.findByIdAndUpdate(requestedId, dataToUpdate, function(err,data){
         // if err saving, respond back with error
         if (err){
-          var error = {status:'ERROR', message: 'Error updating animal'};
+          var error = {status:'ERROR', message: 'Error updating order'};
           return res.json(error);
         }
 
-        console.log('updated the animal!');
+        console.log('updated the order!');
         console.log(data);
 
         // now return the json data of the new person
         var jsonData = {
           status: 'OK',
-          animal: data
+          order: data
         }
 
         return res.json(jsonData);
@@ -291,9 +314,9 @@ router.get('/api/delete/:id', function(req, res){
   var requestedId = req.param('id');
 
   // Mongoose method to remove, http://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
-  Animal.findByIdAndRemove(requestedId,function(err, data){
+  Order.findByIdAndRemove(requestedId,function(err, data){
     if(err || data == null){
-      var error = {status:'ERROR', message: 'Could not find that animal to delete'};
+      var error = {status:'ERROR', message: 'Could not find that order to delete'};
       return res.json(error);
     }
 

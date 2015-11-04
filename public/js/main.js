@@ -26,12 +26,28 @@ jQuery("#addForm").submit(function(e){
 	// first, let's pull out all the values
 	// the name form field value
 	var name = jQuery("#name").val();
-	var age = jQuery("#age").val();
-	var weight = jQuery("#weight").val();
-	var tags = jQuery("#tags").val();
-	var breed = jQuery("#breed").val();
-	var url = jQuery("#url").val();
+	var email = jQuery("#email").val();
+	var orderNumber = jQuery("#orderNumber").val();
+	var customerTags = jQuery("#tags").val();
+	var lineitem1 = jQuery("#lineitem1").val();
+	var lineitem2 = jQuery("#lineitem2").val();
+	var lineitem3 = jQuery("#lineitem3").val();
+	var lineitem4 = jQuery("#lineitem4").val();
+	var totalCost = jQuery("#totalCost").val();
+
+	//var url = jQuery("#url").val();
 	var location = jQuery("#location").val();
+
+ // name: name,
+ //      email: email,
+ //      orderNumber: orderNumber,
+ //      customerTags: Customertags,
+ //      lineitem1: lineitem1,
+ //      lineitem2: lineitem2,
+ //      lineitem3: lineitem3,
+ //      lineitem4: lineitem4,
+ //      totalCost: totalCost,
+ //      location: location
 
 	// make sure we have a location
 	if(!location || location=="") return alert('We need a location!');
@@ -43,13 +59,16 @@ jQuery("#addForm").submit(function(e){
   	type : 'POST',
   	// we send the data in a data object (with key/value pairs)
   	data : {
-  		name : name,
-  		age : age,
-  		tags : tags,
-  		breed : breed,
-  		weight: weight,
-  		url : url,
-  		location : location
+  		name: name,
+      	email: email,
+      	orderNumber: orderNumber,
+      	customerTags: Customertags,
+      	lineitem1: lineitem1,
+      	lineitem2: lineitem2,
+      	lineitem3: lineitem3,
+      	lineitem4: lineitem4,
+      	totalCost: totalCost,
+      	location: location
   	},
   	success : function(response){
   		if(response.status=="OK"){
@@ -89,34 +108,34 @@ var renderPlaces = function() {
 		success : function(response) {
 
 			console.log(response);
-			animals = response.animals;
+			orders = response.orders;
 			// first clear any existing markers, because we will re-add below
 			clearMarkers();
 			markers = [];
 
 			// now, loop through the animals and add them as markers to the map
-			for(var i=0;i<animals.length;i++){
+			for(var i=0;i<orders.length;i++){
 
 				var latLng = {
-					lat: animals[i].location.geo[1], 
-					lng: animals[i].location.geo[0]
+					lat: orders[i].location.geo[1], 
+					lng: orders[i].location.geo[0]
 				}
 
 				// make and place map maker.
 				var marker = new google.maps.Marker({
 				    map: map,
 				    position: latLng,
-				    title : animals[i].name + "<br>" + animals[i].breed + "<br>" + animals[i].location.name
+				    title : orders[i].name + "<br>" + orders[i].email + "<br>" + orders[i].location.name
 				});
 
-				bindInfoWindow(marker, map, infowindow, '<b>'+animals[i].name + "</b> ("+animals[i].breed+") <br>" + animals[i].location.name);
+				bindInfoWindow(marker, map, infowindow, '<b>'+orders[i].name + "</b> ("+orders[i].email+") <br>" + orders[i].location.name);
 				
 				// keep track of markers
 				markers.push(marker);
 			}
 
 			// now, render the animal image/data
-			renderAnimals(animals);
+			renderOrders(orders);
 
 		}
 	})
@@ -129,13 +148,16 @@ jQuery("#editForm").submit(function(e){
 	// first, let's pull out all the values
 	// the name form field value
 	var name = jQuery("#edit-name").val();
-	var age = jQuery("#edit-age").val();
-	var weight = jQuery("#editWeight").val();
-	var tags = jQuery("#edit-tags").val();
-	var breed = jQuery("#edit-breed").val();
-	var url = jQuery("#edit-url").val();
+	var email = jQuery("#edit-email").val();
+	var orderNumber = jQuery("#editorderNumber").val();
+	var customerTags = jQuery("#edit-tags").val();
+	var lineitem1 = jQuery("#edit-lineItem1").val();
+	var lineitem2 = jQuery("#edit-lineItem2").val();
+	var lineitem3 = jQuery("#edit-lineItem3").val();
+	var lineitem4 = jQuery("#edit-lineItem4").val();
+	//var url = jQuery("#edit-url").val();
 	var location = jQuery("#edit-location").val();
-	var id = jQuery("#edit-id").val();
+	var totalCost = jQuery("#edit-totalCost").val();
 
 	// make sure we have a location
 	if(!location || location=="") return alert('We need a location!');
@@ -149,13 +171,16 @@ jQuery("#editForm").submit(function(e){
   	type : 'POST',
   	// we send the data in a data object (with key/value pairs)
   	data : {
-  		name : name,
-  		age : age,
-  		tags : tags,
-  		breed : breed,
-  		weight: weight,
-  		url : url,
-  		location : location
+  		name: name,
+      	email: email,
+      	orderNumber: orderNumber,
+      	customerTags: Customertags,
+      	lineitem1: lineitem1,
+      	lineitem2: lineitem2,
+      	lineitem3: lineitem3,
+      	lineitem4: lineitem4,
+      	totalCost: totalCost,
+      	location: location
   	},
   	success : function(response){
   		if(response.status=="OK"){
@@ -192,29 +217,33 @@ var bindInfoWindow = function(marker, map, infowindow, html) {
     });
 }
 
-function renderAnimals(animals){
+function renderOrders(orders){
 
 	// first, make sure the #animal-holder is empty
-	jQuery('#animal-holder').empty();
+	jQuery('#order-holder').empty();
 
 	// loop through all the animals and add them in the animal-holder div
-	for(var i=0;i<animals.length;i++){
-		var htmlToAdd = '<div class="col-md-4 animal">'+
-			'<img class="url" src="'+animals[i].url+'">'+
-			'<h1 class="name">'+animals[i].name+'</h1>'+
+	for(var i=0;i<orders.length;i++){
+		var htmlToAdd = '<div class="col-md-4 order">'+
+			'<img class="url" src="'+orders[i].url+'">'+
+			'<h1 class="name">'+orders[i].name+'</h1>'+
 			'<ul>'+
-				'<li>Location: <span class="location">'+animals[i].location.name+'</span></li>'+
-				'<li>Breed: <span class="breed">'+animals[i].breed+'</span></li>'+
-				'<li>Age: <span class="age">'+animals[i].age+'</span></li>'+
-				'<li>Weight: <span class="weight">'+animals[i].weight+'</span></li>'+
-				'<li>Tags: <span class="tags">'+animals[i].tags+'</span></li>'+
-				'<li class="hide id">'+animals[i]._id+'</li>'+
+				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+
+				'<li>email: <span class="email">'+orders[i].email+'</span></li>'+
+				'<li>name: <span class="name">'+orders[i].name+'</span></li>'+
+				'<li>orderNumber: <span class="weight">'+orders[i].orderNumber+'</span></li>'+
+				'<li>Tags: <span class="tags">'+orders[i].tags+'</span></li>'+
+				'<li>lineitem1: <span class="lineitem1">'+orders[i].lineitem1+'</span></li>'+
+				'<li>lineitem2: <span class="lineitem2">'+orders[i].lineitem2+'</span></li>'+				
+				'<li>lineitem3: <span class="lineitem3">'+orders[i].lineitem3+'</span></li>'+
+				'<li>lineitem4: <span class="lineitem4">'+orders[i].lineitem4+'</span></li>'+				
+				'<li class="hide id">'+orders[i]._id+'</li>'+
 			'</ul>'+
-			'<button type="button" id="'+animals[i]._id+'" onclick="deleteAnimal(event)">Delete Animal</button>'+
-			'<button type="button" data-toggle="modal" data-target="#editModal"">Edit Animal</button>'+
+			'<button type="button" id="'+orders[i]._id+'" onclick="deleteOrder(event)">Delete Order</button>'+
+			'<button type="button" data-toggle="modal" data-target="#editModal"">Edit Order</button>'+
 		'</div>';
 
-		jQuery('#animal-holder').prepend(htmlToAdd);
+		jQuery('#order-holder').prepend(htmlToAdd);
 
 	}
 }
@@ -228,30 +257,37 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
   // now, let's get the values of the pet that we're wanting to edit
   // we do this by targeting specific spans within the parent and pulling out the text
   var name = $(parent).find('.name').text();
-  var age = $(parent).find('.age').text();
-  var weight = $(parent).find('.weight').text();
-  var tags = $(parent).find('.tags').text();
-  var breed = $(parent).find('.breed').text();
-  var url = $(parent).find('.url').attr('src');
+  var email = $(parent).find('.email').text();
+  var orderNumber = $(parent).find('.orderNumber').text();
+  var customerTags = $(parent).find('.tags').text();
+  var lineitem1 = $(parent).find('.lineitem1').text();
+  var lineitem2 = $(parent).find('.lineitem2').text();
+  var lineitem3 = $(parent).find('.lineitem3').text();
+  var lineitem4 = $(parent).find('.lineitem4').text();
+  var totalCost = $(parent).find('.totalCost').text();
+  //var url = $(parent).find('.url').attr('src');
   var location = $(parent).find('.location').text();
-  var id = $(parent).find('.id').text();
+  //var id = $(parent).find('.id').text();
 
   // now let's set the value of the edit fields to those values
  	jQuery("#edit-name").val(name);
-	jQuery("#edit-age").val(age);
-	jQuery("#editWeight").val(weight);
+	jQuery("#edit-email").val(email);
+	jQuery("#editorderNumber").val(orderNumber);
 	jQuery("#edit-tags").val(tags);
-	jQuery("#edit-breed").val(breed);
-	jQuery("#edit-url").val(url);
+	jQuery("#edit-lineItem1").val(lineitem1);
+	jQuery("#edit-lineItem2").val(lineitem2);
+	jQuery("#edit-lineItem3").val(lineitem3);
+	jQuery("#edit-lineItem4").val(lineitem4);
+	jQuery("#edit-totalCost").val(totalCost);
 	jQuery("#edit-location").val(location);
-	jQuery("#edit-id").val(id);
+	//jQuery("#edit-id").val(id);
 
 })
 
 
-function deleteAnimal(event){
+function deleteOrder(event){
 	var targetedId = event.target.id;
-	console.log('the animal to delete is ' + targetedId);
+	console.log('the order to delete is ' + targetedId);
 
 	// now, let's call the delete route with AJAX
 	jQuery.ajax({

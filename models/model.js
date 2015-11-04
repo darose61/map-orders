@@ -3,15 +3,21 @@ var Schema = mongoose.Schema;
 
 // See http://mongoosejs.com/docs/schematypes.html
 
-var animalSchema = new Schema({
+
+
+var orderSchema = new Schema({
 	name: String,
 	// name: {type: String, required: true}, // this version requires this field to exist
 	// name: {type: String, unique: true}, // this version requires this field to be unique in the db		
-	age: Number,
-	tags: [String],
-	weight: Number,
-	breed: String,
-	url: String,
+	email: String,
+	orderNumber: {type: Number, unique: true},
+	customerTags: [String],
+	lineitem1: String,
+	lineitem2: String,
+	lineitem3: String,
+	lineitem4: String,
+	totalCost: Number,
+	//url: String,
 	location: {
 		geo: { type: [Number], index: { type: '2dsphere', sparse: true } },
 		name: String
@@ -20,4 +26,4 @@ var animalSchema = new Schema({
 })
 
 // export 'Animal' model so we can interact with it in other files
-module.exports = mongoose.model('Animal',animalSchema);
+module.exports = mongoose.model('Order', orderSchema);
