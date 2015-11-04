@@ -59,7 +59,7 @@ router.post('/api/create', function(req, res){
       name: name,
       email: email,
       orderNumber: orderNumber,
-      customerTags: CustomerTags,
+      customerTags: customerTags,
       lineitem1: lineitem1,
       lineitem2: lineitem2,
       lineitem3: lineitem3,
@@ -240,12 +240,13 @@ router.post('/api/update/:id', function(req, res){
       dataToUpdate['totalCost'] = totalCost;
     }
 
-    var Customertags = []; // blank array to hold tags
+    var customerTags = []; // blank array to hold tags
     if(req.body.customerTags){
       customerTags = req.body.tags.split(","); // split string into array
       // add to object that holds updated data
       dataToUpdate['customerTags'] = customerTags;
     }
+  
 
     if(req.body.location) {
       location = req.body.location;
