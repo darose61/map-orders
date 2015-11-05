@@ -238,9 +238,10 @@ function renderOrders(orders){
 				// '<li>lineItem2: <span class="lineItem2">'+orders[i].lineItem2+'</span></li>'+				
 				// '<li>lineItem3: <span class="lineItem3">'+orders[i].lineItem3+'</span></li>'+
 				// '<li>lineItem4: <span class="lineItem4">'+orders[i].lineItem4+'</span></li>'+
-				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+
+				
 				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
-								
+				'<li>Tags: <span class="totalCost">'+orders[i].totalCost+'</span></li>'+	
+				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+			
 				'<li class="hide id">'+orders[i]._id+'</li>'+
 			'</ul>'+
 			'<button class= "buttondlt" type="button" id="'+orders[i]._id+'" onclick="deleteOrder(event)">Delete Order</button>'+
