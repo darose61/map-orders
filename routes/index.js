@@ -24,20 +24,11 @@ router.get('/', function(req, res) {
 });
 
 // simple route to show the pets html
-// router.get('/orders', function(req,res){
-//   res.render('orders.html');
-// })
-
-router.get('/map', function(req,res){
-  res.render('map.html');
-  var jsonData = {
-    'name': 'geolocated-orders',
-    'api-status':'OK'
-  }
-
-  // respond with json data
-  res.json(jsonData)
+router.get('/orders', function(req,res){
+  res.render('orders.html');
 })
+
+
 
 // /**
 //  * POST '/api/create'
