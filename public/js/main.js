@@ -6,8 +6,8 @@ function init() {
   
   // set some default map details, initial center point, zoom and style
   var mapOptions = {
-    center: new google.maps.LatLng(40.74649,-74.0094), // NYC
-    zoom: 10,
+    center: new google.maps.LatLng(38.250206, 1.265472),
+    zoom: 2,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   
@@ -29,10 +29,11 @@ jQuery("#submit-button").click(function(e){
 	var email = jQuery("#email").val();
 	var orderNumber = jQuery("#orderNumber").val();
 	var customerTags = jQuery("#tags").val();
-	var lineItem1 = jQuery("#lineItem1").val();
-	var lineItem2 = jQuery("#lineItem2").val();
-	var lineItem3 = jQuery("#lineItem3").val();
-	var lineItem4 = jQuery("#lineItem4").val();
+	var lineItems = jQuery("#lineItems").val();
+	// var lineItem1 = jQuery("#lineItem1").val();
+	// var lineItem2 = jQuery("#lineItem2").val();
+	// var lineItem3 = jQuery("#lineItem3").val();
+	// var lineItem4 = jQuery("#lineItem4").val();
 	var totalCost = jQuery("#totalCost").val();
 
 	//var url = jQuery("#url").val();
@@ -63,10 +64,11 @@ jQuery("#submit-button").click(function(e){
       	email: email,
       	orderNumber: orderNumber,
       	customerTags: customerTags,
-      	lineItem1: lineItem1,
-      	lineItem2: lineItem2,
-      	lineItem3: lineItem3,
-      	lineItem4: lineItem4,
+      	lineItems: lineItems,
+      	// lineItem1: lineItem1,
+      	// lineItem2: lineItem2,
+      	// lineItem3: lineItem3,
+      	// lineItem4: lineItem4,
       	totalCost: totalCost,
       	location: location
   	},
@@ -125,10 +127,10 @@ var renderPlaces = function() {
 				var marker = new google.maps.Marker({
 				    map: map,
 				    position: latLng,
-				    title : orders[i].name + "<br>" + orders[i].email + "<br>" + orders[i].location.name
+				    title : orders[i].name + "<br>" + orders[i].email + "<br>" + orders[i].location.name + "<br>" + orders[i].orderNumber
 				});
 
-				bindInfoWindow(marker, map, infowindow, '<b>'+orders[i].name + "</b> ("+orders[i].email+") <br>" + orders[i].location.name);
+				bindInfoWindow(marker, map, infowindow, '<b>'+orders[i].name + "</b> ("+orders[i].email+") <br>" + orders[i].location.name+ "<br>" + "Order:" + orders[i].orderNumber);
 				
 				// keep track of markers
 				markers.push(marker);
@@ -151,10 +153,11 @@ jQuery("#editForm").submit(function(e){
 	var email = jQuery("#edit-email").val();
 	var orderNumber = jQuery("#edit-orderNumber").val();
 	var customerTags = jQuery("#edit-tags").val();
-	var lineItem1 = jQuery("#edit-lineItem1").val();
-	var lineItem2 = jQuery("#edit-lineItem2").val();
-	var lineItem3 = jQuery("#edit-lineItem3").val();
-	var lineItem4 = jQuery("#edit-lineItem4").val();
+	var lineItems = jQuery("#edit-lineItems").val();
+	// var lineItem1 = jQuery("#edit-lineItem1").val();
+	// var lineItem2 = jQuery("#edit-lineItem2").val();
+	// var lineItem3 = jQuery("#edit-lineItem3").val();
+	// var lineItem4 = jQuery("#edit-lineItem4").val();
 	//var url = jQuery("#edit-url").val();
 	var location = jQuery("#edit-location").val();
 	var totalCost = jQuery("#edit-totalCost").val();
@@ -174,11 +177,12 @@ jQuery("#editForm").submit(function(e){
   		name: name,
       	email: email,
       	orderNumber: orderNumber,
-      	customerTags: Customertags,
-      	lineItem1: lineItem1,
-      	lineItem2: lineItem2,
-      	lineItem3: lineItem3,
-      	lineItem4: lineItem4,
+      	customerTags: customerTags,
+      	lineItems: lineItems,
+      	// lineItem1: lineItem1,
+      	// lineItem2: lineItem2,
+      	// lineItem3: lineItem3,
+      	// lineItem4: lineItem4,
       	totalCost: totalCost,
       	location: location
   	},
@@ -229,17 +233,18 @@ function renderOrders(orders){
 			'<ul>'+
 				'<li>Name: <span class="name">'+orders[i].name+'</span></li>'+
 				'<li>email: <span class="email">'+orders[i].email+'</span></li>'+
-				'<li>lineItem1: <span class="lineItem1">'+orders[i].lineItem1+'</span></li>'+
-				'<li>lineItem2: <span class="lineItem2">'+orders[i].lineItem2+'</span></li>'+				
-				'<li>lineItem3: <span class="lineItem3">'+orders[i].lineItem3+'</span></li>'+
-				'<li>lineItem4: <span class="lineItem4">'+orders[i].lineItem4+'</span></li>'+
+				'<li>Line Items: <span class="lineItems">'+orders[i].lineItems+'</span></li>'+
+				// '<li>lineItem1: <span class="lineItem1">'+orders[i].lineItem1+'</span></li>'+
+				// '<li>lineItem2: <span class="lineItem2">'+orders[i].lineItem2+'</span></li>'+				
+				// '<li>lineItem3: <span class="lineItem3">'+orders[i].lineItem3+'</span></li>'+
+				// '<li>lineItem4: <span class="lineItem4">'+orders[i].lineItem4+'</span></li>'+
 				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+
 				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
 								
 				'<li class="hide id">'+orders[i]._id+'</li>'+
 			'</ul>'+
-			'<button type="button" id="'+orders[i]._id+'" onclick="deleteOrder(event)">Delete Order</button>'+
-			'<button type="button" data-toggle="modal" data-target="#editModal"">Edit Order</button>'+
+			'<button class= "buttondlt" type="button" id="'+orders[i]._id+'" onclick="deleteOrder(event)">Delete Order</button>'+
+			'<button class= "buttonedt" type="button" data-toggle="modal" data-target="#editModal"">Edit Order</button>'+
 		'</div>';
 
 		jQuery('#order-holder').prepend(htmlToAdd);
@@ -259,10 +264,11 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
   var email = $(parent).find('.email').text();
   var orderNumber = $(parent).find('.orderNumber').text();
   var customerTags = $(parent).find('.tags').text();
-  var lineItem1 = $(parent).find('.lineItem1').text();
-  var lineItem2 = $(parent).find('.lineItem2').text();
-  var lineItem3 = $(parent).find('.lineItem3').text();
-  var lineItem4 = $(parent).find('.lineItem4').text();
+  var lineItems = $(parent).find('.lineItems').text();
+  // var lineItem1 = $(parent).find('.lineItem1').text();
+  // var lineItem2 = $(parent).find('.lineItem2').text();
+  // var lineItem3 = $(parent).find('.lineItem3').text();
+  // var lineItem4 = $(parent).find('.lineItem4').text();
   var totalCost = $(parent).find('.totalCost').text();
   //var url = $(parent).find('.url').attr('src');
   var location = $(parent).find('.location').text();
@@ -271,12 +277,13 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
   // now let's set the value of the edit fields to those values
  	jQuery("#edit-name").val(name);
 	jQuery("#edit-email").val(email);
-	jQuery("#editorderNumber").val(orderNumber);
+	jQuery("#edit-orderNumber").val(orderNumber);
 	jQuery("#edit-tags").val(tags);
-	jQuery("#edit-lineItem1").val(lineItem1);
-	jQuery("#edit-lineItem2").val(lineItem2);
-	jQuery("#edit-lineItem3").val(lineItem3);
-	jQuery("#edit-lineItem4").val(lineItem4);
+	jQuery("#edit-lineItems").val(tags);
+	// jQuery("#edit-lineItem1").val(lineItem1);
+	// jQuery("#edit-lineItem2").val(lineItem2);
+	// jQuery("#edit-lineItem3").val(lineItem3);
+	// jQuery("#edit-lineItem4").val(lineItem4);
 	jQuery("#edit-totalCost").val(totalCost);
 	jQuery("#edit-location").val(location);
 	//jQuery("#edit-id").val(id);

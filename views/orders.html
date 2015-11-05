@@ -28,7 +28,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <h1>Add a New Order</h1>
         <form class="form-horizontal" id="addForm">
           <div class="form-group">
@@ -49,7 +49,13 @@
               <input type="text" class="form-control" id="tags" placeholder="Tags (separated by comma)" name="tags" required>
             </div>
           </div> 
-          <div class="form-group">
+           <div class="form-group">
+            <label for="lineItems" class="col-sm-2 control-label">Line Items</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="lineItems" placeholder="Line Items (Separated by comma)" name="lineItems" required>
+            </div>
+          </div> 
+          <!-- <div class="form-group">
             <label for="lineItem1" class="col-sm-2 control-label">Line Item 1</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="lineItem1" placeholder="Line Item 1" name="line Item 1" required>
@@ -72,7 +78,7 @@
             <div class="col-sm-10">
               <input type="text" class="form-control" id="lineItem4" placeholder="Line Item 4" name="line Item 4">
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="totalCost" class="col-sm-2 control-label">Total Cost</label>
             <div class="col-sm-10">
@@ -105,12 +111,15 @@
         </form>        
         
       </div>
-      <div class="col-md-8" id="order-holder">
+      <div class="col-md-6" id="map-canvas"></div>
+    </div>
+
+  </div>
+  
+
+  <div class="col-md-12" id="order-holder">
         
       </div>
-    </div>
-  </div>
-  <div id="map-canvas"></div>
 
   <!-- Edit Modal -->
   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -141,6 +150,12 @@
               </div>
             </div> 
             <div class="form-group">
+              <label for="lineItems" class="col-sm-2 control-label">Line Items</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="edit-lineItems" placeholder="Line Items" name="tags" required>
+              </div>
+            </div> 
+            <!-- <div class="form-group">
               <label for="lineItem1" class="col-sm-2 control-label">LineItem 1</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="edit-lineItem1" placeholder="lineItem1" name="lineItem1" required>
@@ -163,11 +178,11 @@
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="edit-lineItem4" placeholder="lineItem4" name="lineItem4">
               </div>
-            </div>
+            </div> -->
             <div class="form-group">
             <label for="orderNumber" class="col-sm-2 control-label">Order Number</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="edit-orderNumber" placeholder="orderNumber" name="orderNumber" required>
+              <input type="text" class="form-control" id="edit-orderNumber" placeholder="Order Number" name="orderNumber" required>
             </div>
           </div>
             <div class="form-group">

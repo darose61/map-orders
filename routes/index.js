@@ -24,8 +24,19 @@ router.get('/', function(req, res) {
 });
 
 // simple route to show the pets html
-router.get('/orders', function(req,res){
-  res.render('orders.html');
+// router.get('/orders', function(req,res){
+//   res.render('orders.html');
+// })
+
+router.get('/map', function(req,res){
+  res.render('map.html');
+  var jsonData = {
+    'name': 'geolocated-orders',
+    'api-status':'OK'
+  }
+
+  // respond with json data
+  res.json(jsonData)
 })
 
 // /**
@@ -45,10 +56,11 @@ router.post('/api/create', function(req, res){
     var email = req.body.email;
     var orderNumber = req.body.orderNumber;
     var customerTags = req.body.customerTags.split(","); // split string into array
-    var lineItem1 = req.body.lineItem1;
-    var lineItem2 = req.body.lineItem2;
-    var lineItem3 = req.body.lineItem3;
-    var lineItem4 = req.body.lineItem4;
+    var lineItems = req.body.lineItems.split(","); // split string into array
+    // var lineItem1 = req.body.lineItem1;
+    // var lineItem2 = req.body.lineItem2;
+    // var lineItem3 = req.body.lineItem3;
+    // var lineItem4 = req.body.lineItem4;
     var totalCost = req.body.totalCost;
     //var url = req.body.url;
     var location = req.body.location;
@@ -60,10 +72,11 @@ router.post('/api/create', function(req, res){
       email: email,
       orderNumber: orderNumber,
       customerTags: customerTags,
-      lineItem1: lineItem1,
-      lineItem2: lineItem2,
-      lineItem3: lineItem3,
-      lineItem4: lineItem4,
+      lineItems: lineItems,
+      // lineItem1: lineItem1,
+      // lineItem2: lineItem2,
+      // lineItem3: lineItem3,
+      // lineItem4: lineItem4,
       totalCost: totalCost,
       location: location
     };
@@ -195,7 +208,7 @@ router.post('/api/update/:id', function(req, res){
    var dataToUpdate = {}; // a blank object of data to update
 
     // pull out the information from the req.body and add it to the object to update
-    var name, email, customerTags, lineItem1, lineItem2, lineItem3, lineItem4, totalCost, location; 
+    var name, email, customerTags, lineItems, totalCost, location; 
 
     // we only want to update any field if it actually is contained within the req.body
     // otherwise, leave it alone.
@@ -209,31 +222,38 @@ router.post('/api/update/:id', function(req, res){
       // add to object that holds updated data
       dataToUpdate['email'] = email;
     }
+
+    var lineItems = []; // blank array to hold tags
+    if(req.body.lineItems){
+      lineItems = req.body.lineItems.split(","); // split string into array
+      // add to object that holds updated data
+      dataToUpdate['lineItems'] = lineItems;
+    }
     // if(req.body.customerTags) {
     //   customerTags = req.body.customerTags;
     //   // add to object that holds updated data
     //   dataToUpdate['customerTags'] = customerTags;
     // }
-    if(req.body.lineItem1) {
-      lineItem1 = req.body.lineItem1;
-      // add to object that holds updated data
-      dataToUpdate['lineItem1'] = lineItem1;
-    }
-     if(req.body.lineItem2) {
-      lineItem2 = req.body.lineItem2;
-      // add to object that holds updated data
-      dataToUpdate['lineItem2'] = lineItem2;
-    }
-     if(req.body.lineItem3) {
-      lineItem3 = req.body.lineItem3;
-      // add to object that holds updated data
-      dataToUpdate['lineItem3'] = lineItem3;
-    }
-     if(req.body.lineItem4) {
-      lineItem4 = req.body.lineItem4;
-      // add to object that holds updated data
-      dataToUpdate['lineItem4'] = lineItem4;
-    }
+    // if(req.body.lineItem1) {
+    //   lineItem1 = req.body.lineItem1;
+    //   // add to object that holds updated data
+    //   dataToUpdate['lineItem1'] = lineItem1;
+    // }
+    //  if(req.body.lineItem2) {
+    //   lineItem2 = req.body.lineItem2;
+    //   // add to object that holds updated data
+    //   dataToUpdate['lineItem2'] = lineItem2;
+    // }
+    //  if(req.body.lineItem3) {
+    //   lineItem3 = req.body.lineItem3;
+    //   // add to object that holds updated data
+    //   dataToUpdate['lineItem3'] = lineItem3;
+    // }
+    //  if(req.body.lineItem4) {
+    //   lineItem4 = req.body.lineItem4;
+    //   // add to object that holds updated data
+    //   dataToUpdate['lineItem4'] = lineItem4;
+    // }
     if(req.body.totalCost) {
       totalCost = req.body.totalCost;
       // add to object that holds updated data

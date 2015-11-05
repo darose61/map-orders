@@ -3,13 +3,32 @@
 /**************/
 
 body{
-	background-color: #f3f3f1;
-	color: #3f4953;
+	background-color: #353839;
+	color: #eee;
 }
 
 h1 {
-	color: #f25a4f;
+	color: #FF4524;
 }
+
+.buttondlt {
+	background-color: #FF4524;
+	color: #eee;
+	border: none;
+	border-radius: 2px;
+	padding-left: 5px;
+	margin-left: 15px;
+}
+
+.buttonedt {
+	background-color: #008E8F;
+	color: #eee;
+	border: none;
+	border-radius: 2px;
+	padding-left: 5px;
+	margin-left: 5px;
+}
+
 
 .animal {
 	min-height: 550px;
@@ -24,7 +43,10 @@ h1 {
 }
 
 /* IMPORTANT - must give map div height */
-#map-canvas { height:400px; }
+#map-canvas { 
+	height:500px; 
+	
+}
 
 /* IMPORTANT - fixes webkit infoWindow rendering */
 #map-canvas img { max-width: none; }
