@@ -240,7 +240,7 @@ function renderOrders(orders){
 				// '<li>lineItem4: <span class="lineItem4">'+orders[i].lineItem4+'</span></li>'+
 				
 				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
-				'<li>Amount Spent: <span class="totalCost">'+orders[i].totalCost+'</span></li>'+	
+				'<li>Amount Spent: $<span class="totalCost">'+orders[i].totalCost+'</span></li>'+	
 				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+			
 				'<li class="hide id">'+orders[i]._id+'</li>'+
 			'</ul>'+
