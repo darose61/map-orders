@@ -29,10 +29,10 @@ jQuery("#submit-button").click(function(e){
 	var email = jQuery("#email").val();
 	var orderNumber = jQuery("#orderNumber").val();
 	var customerTags = jQuery("#tags").val();
-	var lineitem1 = jQuery("#lineitem1").val();
-	var lineitem2 = jQuery("#lineitem2").val();
-	var lineitem3 = jQuery("#lineitem3").val();
-	var lineitem4 = jQuery("#lineitem4").val();
+	var lineItem1 = jQuery("#lineItem1").val();
+	var lineItem2 = jQuery("#lineItem2").val();
+	var lineItem3 = jQuery("#lineItem3").val();
+	var lineItem4 = jQuery("#lineItem4").val();
 	var totalCost = jQuery("#totalCost").val();
 
 	//var url = jQuery("#url").val();
@@ -42,10 +42,10 @@ jQuery("#submit-button").click(function(e){
  //      email: email,
  //      orderNumber: orderNumber,
  //      customerTags: Customertags,
- //      lineitem1: lineitem1,
- //      lineitem2: lineitem2,
- //      lineitem3: lineitem3,
- //      lineitem4: lineitem4,
+ //      lineItem1: lineItem1,
+ //      lineItem2: lineItem2,
+ //      lineItem3: lineItem3,
+ //      lineItem4: lineItem4,
  //      totalCost: totalCost,
  //      location: location
 
@@ -63,10 +63,10 @@ jQuery("#submit-button").click(function(e){
       	email: email,
       	orderNumber: orderNumber,
       	customerTags: customerTags,
-      	lineitem1: lineitem1,
-      	lineitem2: lineitem2,
-      	lineitem3: lineitem3,
-      	lineitem4: lineitem4,
+      	lineItem1: lineItem1,
+      	lineItem2: lineItem2,
+      	lineItem3: lineItem3,
+      	lineItem4: lineItem4,
       	totalCost: totalCost,
       	location: location
   	},
@@ -149,12 +149,12 @@ jQuery("#editForm").submit(function(e){
 	// the name form field value
 	var name = jQuery("#edit-name").val();
 	var email = jQuery("#edit-email").val();
-	var orderNumber = jQuery("#editorderNumber").val();
+	var orderNumber = jQuery("#edit-orderNumber").val();
 	var customerTags = jQuery("#edit-tags").val();
-	var lineitem1 = jQuery("#edit-lineItem1").val();
-	var lineitem2 = jQuery("#edit-lineItem2").val();
-	var lineitem3 = jQuery("#edit-lineItem3").val();
-	var lineitem4 = jQuery("#edit-lineItem4").val();
+	var lineItem1 = jQuery("#edit-lineItem1").val();
+	var lineItem2 = jQuery("#edit-lineItem2").val();
+	var lineItem3 = jQuery("#edit-lineItem3").val();
+	var lineItem4 = jQuery("#edit-lineItem4").val();
 	//var url = jQuery("#edit-url").val();
 	var location = jQuery("#edit-location").val();
 	var totalCost = jQuery("#edit-totalCost").val();
@@ -175,10 +175,10 @@ jQuery("#editForm").submit(function(e){
       	email: email,
       	orderNumber: orderNumber,
       	customerTags: Customertags,
-      	lineitem1: lineitem1,
-      	lineitem2: lineitem2,
-      	lineitem3: lineitem3,
-      	lineitem4: lineitem4,
+      	lineItem1: lineItem1,
+      	lineItem2: lineItem2,
+      	lineItem3: lineItem3,
+      	lineItem4: lineItem4,
       	totalCost: totalCost,
       	location: location
   	},
@@ -229,10 +229,10 @@ function renderOrders(orders){
 			'<ul>'+
 				'<li>Name: <span class="name">'+orders[i].name+'</span></li>'+
 				'<li>email: <span class="email">'+orders[i].email+'</span></li>'+
-				'<li>lineitem1: <span class="lineitem1">'+orders[i].lineItem1+'</span></li>'+
-				'<li>lineitem2: <span class="lineitem2">'+orders[i].lineItem2+'</span></li>'+				
-				'<li>lineitem3: <span class="lineitem3">'+orders[i].lineItem3+'</span></li>'+
-				'<li>lineitem4: <span class="lineitem4">'+orders[i].lineItem4+'</span></li>'+
+				'<li>lineItem1: <span class="lineItem1">'+orders[i].lineItem1+'</span></li>'+
+				'<li>lineItem2: <span class="lineItem2">'+orders[i].lineItem2+'</span></li>'+				
+				'<li>lineItem3: <span class="lineItem3">'+orders[i].lineItem3+'</span></li>'+
+				'<li>lineItem4: <span class="lineItem4">'+orders[i].lineItem4+'</span></li>'+
 				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+
 				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
 								
@@ -259,10 +259,10 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
   var email = $(parent).find('.email').text();
   var orderNumber = $(parent).find('.orderNumber').text();
   var customerTags = $(parent).find('.tags').text();
-  var lineitem1 = $(parent).find('.lineItem1').text();
-  var lineitem2 = $(parent).find('.lineItem2').text();
-  var lineitem3 = $(parent).find('.lineItem3').text();
-  var lineitem4 = $(parent).find('.lineItem4').text();
+  var lineItem1 = $(parent).find('.lineItem1').text();
+  var lineItem2 = $(parent).find('.lineItem2').text();
+  var lineItem3 = $(parent).find('.lineItem3').text();
+  var lineItem4 = $(parent).find('.lineItem4').text();
   var totalCost = $(parent).find('.totalCost').text();
   //var url = $(parent).find('.url').attr('src');
   var location = $(parent).find('.location').text();
@@ -273,10 +273,10 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
 	jQuery("#edit-email").val(email);
 	jQuery("#editorderNumber").val(orderNumber);
 	jQuery("#edit-tags").val(tags);
-	jQuery("#edit-lineItem1").val(lineitem1);
-	jQuery("#edit-lineItem2").val(lineitem2);
-	jQuery("#edit-lineItem3").val(lineitem3);
-	jQuery("#edit-lineItem4").val(lineitem4);
+	jQuery("#edit-lineItem1").val(lineItem1);
+	jQuery("#edit-lineItem2").val(lineItem2);
+	jQuery("#edit-lineItem3").val(lineItem3);
+	jQuery("#edit-lineItem4").val(lineItem4);
 	jQuery("#edit-totalCost").val(totalCost);
 	jQuery("#edit-location").val(location);
 	//jQuery("#edit-id").val(id);
