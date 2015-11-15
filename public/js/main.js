@@ -161,6 +161,7 @@ jQuery("#editForm").submit(function(e){
 	//var url = jQuery("#edit-url").val();
 	var location = jQuery("#edit-location").val();
 	var totalCost = jQuery("#edit-totalCost").val();
+	var id = jQuery("#edit-id").val();
 
 	// make sure we have a location
 	if(!location || location=="") return alert('We need a location!');
@@ -229,7 +230,7 @@ function renderOrders(orders){
 	// loop through all the animals and add them in the animal-holder div
 	for(var i=0;i<orders.length;i++){
 		var htmlToAdd = '<div class="col-md-4 order">'+
-			'<h2 class="name">'+orders[i].orderNumber+'</h2>'+
+			'<h2 class="orderNumber">'+orders[i].orderNumber+'</h2>'+
 			'<ul>'+
 				'<li>Name: <span class="name">'+orders[i].name+'</span></li>'+
 				'<li>email: <span class="email">'+orders[i].email+'</span></li>'+
@@ -240,7 +241,8 @@ function renderOrders(orders){
 				// '<li>lineItem4: <span class="lineItem4">'+orders[i].lineItem4+'</span></li>'+
 				
 				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
-				'<li>Amount Spent: $<span class="totalCost">'+orders[i].totalCost+'</span></li>'+	
+				'<li>Amount Spent: $<span class="totalCost">'+orders[i].totalCost+'</span></li>'+
+				//'<li>Amount Spent: $<span class="totalCost">'+orders[i].totalCost+'</span></li>'+	
 				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+			
 				'<li class="hide id">'+orders[i]._id+'</li>'+
 			'</ul>'+
@@ -273,21 +275,23 @@ jQuery('#editModal').on('show.bs.modal', function (e) {
   var totalCost = $(parent).find('.totalCost').text();
   //var url = $(parent).find('.url').attr('src');
   var location = $(parent).find('.location').text();
-  //var id = $(parent).find('.id').text();
+  var id = $(parent).find('.id').text();
+
+  console.log(id);
 
   // now let's set the value of the edit fields to those values
  	jQuery("#edit-name").val(name);
 	jQuery("#edit-email").val(email);
 	jQuery("#edit-orderNumber").val(orderNumber);
-	jQuery("#edit-tags").val(tags);
-	jQuery("#edit-lineItems").val(tags);
+	jQuery("#edit-tags").val(customerTags);
+	jQuery("#edit-lineItems").val(lineItems);
 	// jQuery("#edit-lineItem1").val(lineItem1);
 	// jQuery("#edit-lineItem2").val(lineItem2);
 	// jQuery("#edit-lineItem3").val(lineItem3);
 	// jQuery("#edit-lineItem4").val(lineItem4);
 	jQuery("#edit-totalCost").val(totalCost);
 	jQuery("#edit-location").val(location);
-	//jQuery("#edit-id").val(id);
+	jQuery("#edit-id").val(id);
 
 })
 

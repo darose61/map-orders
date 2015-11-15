@@ -258,7 +258,7 @@ router.post('/api/update/:id', function(req, res){
     }
 
     var customerTags = []; // blank array to hold tags
-    if(req.body.customerTags){
+    if(req.body.tags){
       customerTags = req.body.tags.split(","); // split string into array
       // add to object that holds updated data
       dataToUpdate['customerTags'] = customerTags;
@@ -267,6 +267,7 @@ router.post('/api/update/:id', function(req, res){
 
     if(req.body.location) {
       location = req.body.location;
+      dataToUpdate['location'] = location;
     }
 
     // if there is no location, return an error
