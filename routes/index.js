@@ -37,6 +37,11 @@ router.get('/orders', function(req,res){
 //  * @return {Object} JSON
 //  */
 
+router.post('/webhooks/newOrder', function(req){
+    console.log('the data we received is --> ')
+    console.log(req.body);
+})
+
 router.post('/api/create', function(req, res){
 
     console.log('the data we received is --> ')
@@ -48,10 +53,6 @@ router.post('/api/create', function(req, res){
     var orderNumber = req.body.orderNumber;
     var customerTags = req.body.customerTags.split(","); // split string into array
     var lineItems = req.body.lineItems.split(","); // split string into array
-    // var lineItem1 = req.body.lineItem1;
-    // var lineItem2 = req.body.lineItem2;
-    // var lineItem3 = req.body.lineItem3;
-    // var lineItem4 = req.body.lineItem4;
     var totalCost = req.body.totalCost;
     //var url = req.body.url;
     var location = req.body.location;
@@ -64,10 +65,6 @@ router.post('/api/create', function(req, res){
       orderNumber: orderNumber,
       customerTags: customerTags,
       lineItems: lineItems,
-      // lineItem1: lineItem1,
-      // lineItem2: lineItem2,
-      // lineItem3: lineItem3,
-      // lineItem4: lineItem4,
       totalCost: totalCost,
       location: location
     };
