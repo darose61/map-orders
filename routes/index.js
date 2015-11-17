@@ -46,9 +46,9 @@ router.post('/webhooks/newOrder', function(req){
     var orderNumber = req.body.order_number;
     var customerTags = req.body.tags; 
     var lineItems = [];
-    req.body.line_items.forEach(function(line_item){
-        lineItems.append(line_item.title);
-    });
+    // req.body.line_items.forEach(function(line_item){
+    //     lineItems.append(line_item.title);
+    // });
     
     var totalCost = req.body.total_price_usd;
     //var url = req.body.url;
