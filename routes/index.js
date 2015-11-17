@@ -39,11 +39,11 @@ router.get('/orders', function(req,res){
 
 router.post('/webhooks/newOrder', function(req){
     // console.log('the data we received is --> ')
-    console.log(req.body);
+    //console.log(req.body);
 
-    //console.log(req.body.line_items);
+    console.log(req.body.line_items);
 
-    var name = req.body.customer.name;
+    var name = req.body.customer.first_name + ' ' + req.body.custoemr.last_name;
     var email = req.body.email;
     var orderNumber = req.body.order_number;
     var customerTags = req.body.tags.split(","); 
@@ -69,7 +69,7 @@ router.post('/webhooks/newOrder', function(req){
           location: location
         };
 
-    //console.log(orderObj);
+    console.log(orderObj);
 
     // if there is no location, return an error
     // if(!location) return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
