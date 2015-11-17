@@ -38,9 +38,88 @@ router.get('/orders', function(req,res){
 //  */
 
 router.post('/webhooks/newOrder', function(req){
-    console.log('the data we received is --> ')
-    console.log(req.body);
-})
+    // console.log('the data we received is --> ')
+    // console.log(req.body);
+
+    var name = req.body.name;
+    var email = req.body.email;
+    var orderNumber = req.body.order_number;
+    var customerTags = req.body.tags; 
+    var lineItems = [];
+    req.body.line_items.forEach(function(line_item){
+        lineItems.append(line_item.title);
+    });
+    
+    var totalCost = req.body.total_price_usd;
+    //var url = req.body.url;
+    var location = req.body.zip;
+
+var orderObj = {
+      name: name,
+      email: email,
+      orderNumber: orderNumber,
+      customerTags: customerTags,
+      lineItems: lineItems,
+      totalCost: totalCost,
+      location: location
+    };
+
+    console.log(orderObj);
+
+    // if there is no location, return an error
+    // if(!location) return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
+
+    // // now, let's geocode the location
+    // geocoder.geocode(location, function (err,data) {
+
+
+    //   // if we get an error, or don't have any results, respond back with error
+    //   if (!data || data==null || err || data.status == 'ZERO_RESULTS'){
+    //     var error = {status:'ERROR', message: 'Error finding location'};
+    //     return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
+    //   }
+
+    //   // else, let's pull put the lat lon from the results
+    //   var lon = data.results[0].geometry.location.lng;
+    //   var lat = data.results[0].geometry.location.lat;
+
+    //   // now, let's add this to our animal object from above
+    //   orderObj.location = {
+    //     geo: [lon,lat], // need to put the geo co-ordinates in a lng-lat array for saving
+    //     name: data.results[0].formatted_address // the location name
+    //   }
+
+    //   // now, let's save it to the database
+    //   // create a new animal model instance, passing in the object we've created
+    //   var order = new Order(orderObj);
+
+    //   // now, save that animal instance to the database
+    //   // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save    
+    //   order.save(function(err,data){
+    //     // if err saving, respond back with error
+    //     if (err){
+    //       var error = {status:'ERROR', message: 'Error saving order'};
+    //       return res.json(error);
+    //     }
+
+    //     console.log('saved a new order!');
+    //     console.log(data);
+
+    //     // now return the json data of the new animal
+    //     var jsonData = {
+    //       status: 'OK',
+    //       order: data
+    //     }
+
+    //     return res.json(jsonData);
+
+      // }) 
+
+     // }); 
+
+});
+
+
 
 router.post('/api/create', function(req, res){
 
