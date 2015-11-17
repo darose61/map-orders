@@ -43,7 +43,7 @@ router.post('/webhooks/newOrder', function(req){
 
     console.log(req.body.line_items);
 
-    var name = req.body.customer.first_name + ' ' + req.body.custoemr.last_name;
+    var name = req.body.customer.first_name + ' ' + req.body.customer.last_name;
     var email = req.body.email;
     var orderNumber = req.body.order_number;
     var customerTags = req.body.tags.split(","); 
