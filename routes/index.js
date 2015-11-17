@@ -37,7 +37,7 @@ router.get('/orders', function(req,res){
 //  * @return {Object} JSON
 //  */
 
-router.post('/webhooks/newOrder', function(req){
+router.post('/webhooks/newOrder', function(req, res){
     // console.log('the data we received is --> ')
     //console.log(req.body);
 
