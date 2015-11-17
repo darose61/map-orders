@@ -99,6 +99,7 @@ router.post('/webhooks/newOrder', function(req, res){
       order.save(function(err,data){
         // if err saving, respond back with error
         if (err){
+          console.log(err);
           var error = {status:'ERROR', message: 'Error saving order'};
           return res.json(error);
         }
