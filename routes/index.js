@@ -44,7 +44,7 @@ router.post('/webhooks/newOrder', function(req, res){
     var name = req.body.customer.first_name + ' ' + req.body.customer.last_name;
     var email = req.body.email;
     var orderNumber = req.body.order_number;
-    var customerTags = req.body.tags.split(","); 
+    var customerTags = req.body.customer.tags.split(","); 
     var lineItems = [];
     for (var i = 0; i < req.body.line_items.length; i++){
       lineItems.push(req.body.line_items[i].title);
