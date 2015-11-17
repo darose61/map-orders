@@ -40,14 +40,15 @@ router.get('/orders', function(req,res){
 router.post('/webhooks/newOrder', function(req){
     // console.log('the data we received is --> ')
     // console.log(req.body);
+    console.log(req.body.customer);
 
     var name = req.body.customer.name;
     var email = req.body.email;
     var orderNumber = req.body.order_number;
-    var customerTags = req.body.tags; 
+    var customerTags = req.body.tags.split(","); 
     var lineItems = [];
     for (var i = 0; i < req.body.line_items; i++){
-      lineItems.append(req.body.line_items[i]);
+      lineItems.append(req.body.line_items[i].title);
     };
     // req.body.line_items.forEach(function(line_item){
     //     lineItems.append(line_item.title);
