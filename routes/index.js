@@ -67,58 +67,56 @@ router.post('/webhooks/newOrder', function(req){
           location: location
         };
 
-    console.log(orderObj);
+    if there is no location, return an error
+    if(!location) return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
 
-    // if there is no location, return an error
-    // if(!location) return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
-
-    // // now, let's geocode the location
-    // geocoder.geocode(location, function (err,data) {
+    // now, let's geocode the location
+    geocoder.geocode(location, function (err,data) {
 
 
-    //   // if we get an error, or don't have any results, respond back with error
-    //   if (!data || data==null || err || data.status == 'ZERO_RESULTS'){
-    //     var error = {status:'ERROR', message: 'Error finding location'};
-    //     return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
-    //   }
+      // if we get an error, or don't have any results, respond back with error
+      if (!data || data==null || err || data.status == 'ZERO_RESULTS'){
+        var error = {status:'ERROR', message: 'Error finding location'};
+        return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
+      }
 
-    //   // else, let's pull put the lat lon from the results
-    //   var lon = data.results[0].geometry.location.lng;
-    //   var lat = data.results[0].geometry.location.lat;
+      // else, let's pull put the lat lon from the results
+      var lon = data.results[0].geometry.location.lng;
+      var lat = data.results[0].geometry.location.lat;
 
-    //   // now, let's add this to our animal object from above
-    //   orderObj.location = {
-    //     geo: [lon,lat], // need to put the geo co-ordinates in a lng-lat array for saving
-    //     name: data.results[0].formatted_address // the location name
-    //   }
+      // now, let's add this to our animal object from above
+      orderObj.location = {
+        geo: [lon,lat], // need to put the geo co-ordinates in a lng-lat array for saving
+        name: data.results[0].formatted_address // the location name
+      }
 
-    //   // now, let's save it to the database
-    //   // create a new animal model instance, passing in the object we've created
-    //   var order = new Order(orderObj);
+      // now, let's save it to the database
+      // create a new animal model instance, passing in the object we've created
+      var order = new Order(orderObj);
 
-    //   // now, save that animal instance to the database
-    //   // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save    
-    //   order.save(function(err,data){
-    //     // if err saving, respond back with error
-    //     if (err){
-    //       var error = {status:'ERROR', message: 'Error saving order'};
-    //       return res.json(error);
-    //     }
+      // now, save that animal instance to the database
+      // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save    
+      order.save(function(err,data){
+        // if err saving, respond back with error
+        if (err){
+          var error = {status:'ERROR', message: 'Error saving order'};
+          return res.json(error);
+        }
 
-    //     console.log('saved a new order!');
-    //     console.log(data);
+        console.log('saved a new order!');
+        console.log(data);
 
-    //     // now return the json data of the new animal
-    //     var jsonData = {
-    //       status: 'OK',
-    //       order: data
-    //     }
+        // now return the json data of the new animal
+        var jsonData = {
+          status: 'OK',
+          order: data
+        }
 
-    //     return res.json(jsonData);
+        return res.json(jsonData);
 
-      // }) 
+      }) 
 
-     // }); 
+     }); 
 
 });
 
