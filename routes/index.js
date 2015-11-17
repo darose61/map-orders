@@ -41,7 +41,7 @@ router.post('/webhooks/newOrder', function(req){
     // console.log('the data we received is --> ')
     // console.log(req.body);
 
-    var name = req.body.name;
+    var name = req.body.shipping_lines.name;
     var email = req.body.email;
     var orderNumber = req.body.order_number;
     var customerTags = req.body.tags; 
@@ -52,17 +52,17 @@ router.post('/webhooks/newOrder', function(req){
     
     var totalCost = req.body.total_price_usd;
     //var url = req.body.url;
-    var location = req.body.zip;
+    var location = req.body.shipping_lines.zip;
 
-var orderObj = {
-      name: name,
-      email: email,
-      orderNumber: orderNumber,
-      customerTags: customerTags,
-      lineItems: lineItems,
-      totalCost: totalCost,
-      location: location
-    };
+    var orderObj = {
+          name: name,
+          email: email,
+          orderNumber: orderNumber,
+          customerTags: customerTags,
+          lineItems: lineItems,
+          totalCost: totalCost,
+          location: location
+        };
 
     console.log(orderObj);
 
