@@ -67,7 +67,7 @@ router.post('/webhooks/newOrder', function(req, res){
           location: location
         };
 
-    if there is no location, return an error
+    // if there is no location, return an error
     if(!location) return res.json({status:'ERROR', message: 'You are missing a required field or have submitted a malformed request.'})
 
     // now, let's geocode the location
@@ -116,7 +116,7 @@ router.post('/webhooks/newOrder', function(req, res){
 
       }) 
 
-     }); 
+    }); 
 
 });
 
