@@ -1,5 +1,12 @@
 // CUSTOM JS FILE //
 function init() {
+	jQuery.ajax({
+		url : '/api/get',
+		dataType : 'json',
+		success : function(response) {
+
+			console.log(response);
+			orders = response.orders;
 	renderOrders(orders);
 	console.log(orders);
 }
