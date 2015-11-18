@@ -11,8 +11,8 @@ function init() {
 		}	
 
 	//console.log(orders);
-	}
-}
+	})
+};
 
 function renderOrders(orders){
 
