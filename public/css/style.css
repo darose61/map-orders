@@ -29,16 +29,26 @@ h1 {
 	margin-left: 5px;
 }
 
+.buttonslct {
+	background-color: #008E8F;
+	width: 150px;
+	color: #eee;
+	border: none;
+	border-radius: 2px;
+	padding-left: 0px;
+	margin-bottom: 20px;
+	text-align: center;
+	left: 50%;
 
-.animal {
-	min-height: 550px;
 }
 
-.animal img {
-	width: 100%;
+.order {
+	min-height: 300px;
 }
 
-#animal-holder{
+
+
+#order-holder{
 	margin-top: 75px;
 }
 

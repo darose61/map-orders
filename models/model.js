@@ -13,12 +13,8 @@ var orderSchema = new Schema({
 	orderNumber: {type: Number, unique: true},
 	customerTags: [String],
 	lineItems: [String],
-	// lineItem1: String,
-	// lineItem2: String,
-	// lineItem3: String,
-	// lineItem4: String,
+	vendor: [String],
 	totalCost: Number,
-	//url: String,
 	location: {
 		geo: { type: [Number], index: { type: '2dsphere', sparse: true } },
 		name: String

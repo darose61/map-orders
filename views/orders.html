@@ -55,6 +55,12 @@
               <input type="text" class="form-control" id="lineItems" placeholder="Line Items (Separated by comma)" name="lineItems" required>
             </div>
           </div> 
+           <div class="form-group">
+            <label for="vendor" class="col-sm-2 control-label">Vendor</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="vendor" placeholder="Vendors (Separated by comma)" name="vendor" required>
+            </div>
+          </div> 
           <!-- <div class="form-group">
             <label for="lineItem1" class="col-sm-2 control-label">Line Item 1</label>
             <div class="col-sm-10">
@@ -111,7 +117,7 @@
         </form>        
         
       </div>
-      <div class="col-md-6" id="map-canvas"></div>
+      
     </div>
 
   </div>
@@ -152,33 +158,17 @@
             <div class="form-group">
               <label for="lineItems" class="col-sm-2 control-label">Line Items</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="edit-lineItems" placeholder="Line Items" name="tags" required>
+                <input type="text" class="form-control" id="edit-lineItems" placeholder="Line Items" name="lineItems" required>
               </div>
             </div> 
-            <!-- <div class="form-group">
-              <label for="lineItem1" class="col-sm-2 control-label">LineItem 1</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="edit-lineItem1" placeholder="lineItem1" name="lineItem1" required>
-              </div>
-            </div>
+
             <div class="form-group">
-              <label for="lineItem2" class="col-sm-2 control-label">LineItem 2</label>
+              <label for="vendor" class="col-sm-2 control-label">Vendor</label>
               <div class="col-sm-10">
-                <input type="text" class="form-control" id="edit-lineItem2" placeholder="lineItem2" name="lineItem2">
+                <input type="text" class="form-control" id="edit-vendor" placeholder="Vendor(s)" name="vendor" required>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="lineItem3" class="col-sm-2 control-label">LineItem 3</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="edit-lineItem3" placeholder="lineItem3" name="lineItem3">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="lineItem4" class="col-sm-2 control-label">LineItem 4</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="edit-lineItem4" placeholder="lineItem4" name="lineItem4">
-              </div>
-            </div> -->
+            </div> 
+            
             <div class="form-group">
             <label for="orderNumber" class="col-sm-2 control-label">Order Number</label>
             <div class="col-sm-10">
@@ -191,12 +181,7 @@
                 <input type="text" class="form-control" id="edit-totalCost" placeholder="Total Cost" name="totalCost" required>
               </div>
             </div>
-            <!-- <div class="form-group">
-              <label for="url" class="col-sm-2 control-label">ImgURL</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="edit-url" placeholder="PhotoURL" name="url" required>
-              </div>
-            </div> -->
+        
             <div class="form-group">
               <label for="location" class="col-sm-2 control-label">Location</label>
               <div class="col-sm-10">
