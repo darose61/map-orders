@@ -7,8 +7,11 @@ function init() {
 
 			console.log(response);
 			orders = response.orders;
-	renderOrders(orders);
-	console.log(orders);
+			renderOrders(orders);
+		}	
+
+	//console.log(orders);
+	}
 }
 
 function renderOrders(orders){
