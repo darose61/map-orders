@@ -49,7 +49,7 @@ var renderPlaces = function() {
             title : orders[i].orderNumber + "<br>" + orders[i].name + "<br>" + orders[i].email + "<br>" + orders[i].totalCost + "<br>" + orders[i].vendor + "<br>" + orders[i].location.name  
         });
 
-        bindInfoWindow(marker, map, infowindow, '<b>'+ "Order:" + orders[i].orderNumber + "<br>" + orders[i].name + "</b>  + "Amount Spent: $" + orders[i].totalCost + "<br>" + "Vendor: " + orders[i].vendor + "<br>" + orders[i].location.name+ "<br>" );
+        bindInfoWindow(marker, map, infowindow, '<b>'+ "Order:" + orders[i].orderNumber + "<br>" + orders[i].name + "</b>"  + "Amount Spent: $" + orders[i].totalCost + "<br>" + "Vendor: " + orders[i].vendor + "<br>" + orders[i].location.name+ "<br>" );
         
         // keep track of markers
         markers.push(marker);
