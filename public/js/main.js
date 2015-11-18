@@ -1,46 +1,24 @@
 // CUSTOM JS FILE //
+var map; // global map variable
+var markers = []; // array to hold map markers
+
 function init() {
-	jQuery.ajax({
-		url : '/api/get',
-		dataType : 'json',
-		success : function(response) {
-
-			console.log(response);
-			orders = response.orders;
-			renderOrders(orders);
-		}	
-
-	//console.log(orders);
-	})
-};
-
-function renderOrders(orders){
-
-	// first, make sure the #animal-holder is empty
-	jQuery('#order-holder').empty();
-
-	// loop through all the animals and add them in the animal-holder div
-	for(var i=0;i<orders.length;i++){
-		var htmlToAdd = '<div class="col-md-4 order">'+
-			'<h2 class="orderNumber">'+orders[i].orderNumber+'</h2>'+
-			'<ul>'+
-				'<li>Name: <span class="name">'+orders[i].name+'</span></li>'+
-				'<li>email: <span class="email">'+orders[i].email+'</span></li>'+
-				'<li>Line Items: <span class="lineItems">'+orders[i].lineItems+'</span></li>'+
-				'<li>Vendor(s): <span class="vendor">'+orders[i].vendor+'</span></li>'+
-				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
-				'<li>Amount Spent: $<span class="totalCost">'+orders[i].totalCost+'</span></li>'+
-				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+			
-				'<li class="hide id">'+orders[i]._id+'</li>'+
-			'</ul>'+
-			'<button class= "buttondlt" type="button" id="'+orders[i]._id+'" onclick="deleteOrder(event)">Delete Order</button>'+
-			'<button class= "buttonedt" type="button" data-toggle="modal" data-target="#editModal"">Edit Order</button>'+
-		'</div>';
-
-		jQuery('#order-holder').prepend(htmlToAdd);
-
-	}
+  
+  // set some default map details, initial center point, zoom and style
+  var mapOptions = {
+    center: new google.maps.LatLng(38.250206, 1.265472),
+    zoom: 2,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  
+  // create the map and reference the div#map-canvas container
+  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  
+  // get the animals (ajax) 
+  // and render them on the map
+  renderPlaces();
 }
+
 // add form button event
 // when the form is submitted (with a new animal), the below runs
 jQuery("#submit-button").click(function(e){
@@ -57,6 +35,8 @@ jQuery("#submit-button").click(function(e){
 
 	//var url = jQuery("#url").val();
 	var location = jQuery("#location").val();
+
+
 
 	// make sure we have a location
 	if(!location || location=="") return alert('We need a location!');
@@ -82,7 +62,7 @@ jQuery("#submit-button").click(function(e){
 	  		// success
 	  		console.log(response);
 	  		// re-render the map
-	  	//	renderPlaces();
+	  		renderPlaces();
 	  		// now, clear the input fields
 	  		jQuery("#addForm input").val('');
   		}
@@ -104,7 +84,49 @@ jQuery("#submit-button").click(function(e){
 
 // get Animals JSON from /api/get
 // loop through and populate the map with markers
+var renderPlaces = function() {
+	var infowindow =  new google.maps.InfoWindow({
+	    content: ''
+	});
 
+	jQuery.ajax({
+		url : '/api/get',
+		dataType : 'json',
+		success : function(response) {
+
+			console.log(response);
+			orders = response.orders;
+			// first clear any existing markers, because we will re-add below
+			clearMarkers();
+			markers = [];
+
+			// now, loop through the animals and add them as markers to the map
+			for(var i=0;i<orders.length;i++){
+
+				var latLng = {
+					lat: orders[i].location.geo[1], 
+					lng: orders[i].location.geo[0]
+				}
+
+				// make and place map maker.
+				var marker = new google.maps.Marker({
+				    map: map,
+				    position: latLng,
+				    title : orders[i].orderNumber + "<br>" + orders[i].name + "<br>" + orders[i].email + "<br>" + orders[i].totalCost + "<br>" + orders[i].vendor + "<br>" + orders[i].location.name  
+				});
+
+				bindInfoWindow(marker, map, infowindow, '<b>'+ "Order:" + orders[i].orderNumber + "<br>" + orders[i].name + "</b> ("+orders[i].email+") <br>" + "Amount Spent: $" + orders[i].totalCost + "<br>" + "Vendor: " + orders[i].vendor + "<br>" + orders[i].location.name+ "<br>" );
+				
+				// keep track of markers
+				markers.push(marker);
+			}
+
+			// now, render the animal image/data
+			renderOrders(orders);
+
+		}
+	})
+};
 
 // edit form button event
 // when the form is submitted (with a new animal edit), the below runs
@@ -171,8 +193,40 @@ jQuery("#editForm").submit(function(e){
 });
 
 // binds a map marker and infoWindow together on click
+var bindInfoWindow = function(marker, map, infowindow, html) {
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(html);
+        infowindow.open(map, marker);
+    });
+}
 
+function renderOrders(orders){
 
+	// first, make sure the #animal-holder is empty
+	jQuery('#order-holder').empty();
+
+	// loop through all the animals and add them in the animal-holder div
+	for(var i=0;i<orders.length;i++){
+		var htmlToAdd = '<div class="col-md-4 order">'+
+			'<h2 class="orderNumber">'+orders[i].orderNumber+'</h2>'+
+			'<ul>'+
+				'<li>Name: <span class="name">'+orders[i].name+'</span></li>'+
+				'<li>email: <span class="email">'+orders[i].email+'</span></li>'+
+				'<li>Line Items: <span class="lineItems">'+orders[i].lineItems+'</span></li>'+
+				'<li>Vendor(s): <span class="vendor">'+orders[i].vendor+'</span></li>'+
+				'<li>Tags: <span class="tags">'+orders[i].customerTags+'</span></li>'+
+				'<li>Amount Spent: $<span class="totalCost">'+orders[i].totalCost+'</span></li>'+
+				'<li>Location: <span class="location">'+orders[i].location.name+'</span></li>'+			
+				'<li class="hide id">'+orders[i]._id+'</li>'+
+			'</ul>'+
+			'<button class= "buttondlt" type="button" id="'+orders[i]._id+'" onclick="deleteOrder(event)">Delete Order</button>'+
+			'<button class= "buttonedt" type="button" data-toggle="modal" data-target="#editModal"">Edit Order</button>'+
+		'</div>';
+
+		jQuery('#order-holder').prepend(htmlToAdd);
+
+	}
+}
 
 jQuery('#editModal').on('show.bs.modal', function (e) {
   // let's get access to what we just clicked on
@@ -219,7 +273,7 @@ function deleteOrder(event){
 		success : function(response) {
 			// now, let's re-render the animals
 
-			//renderPlaces();
+			renderPlaces();
 
 		}
 	})
@@ -227,6 +281,11 @@ function deleteOrder(event){
 	event.preventDefault();
 }
 
-
+function clearMarkers(){
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null); // clears the markers
+  }	
+}
 
 // when page is ready, initialize the map!
+google.maps.event.addDomListener(window, 'load', init);
