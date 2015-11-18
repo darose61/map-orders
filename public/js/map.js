@@ -77,3 +77,13 @@ var bindInfoWindow = function(marker, map, infowindow, html) {
 
 
 google.maps.event.addDomListener(window, 'load', init);
+
+function vendorlist(){
+  var vendorSet = {};
+  for (var i = 0; i < orders.length; i++){
+    set{vendorname} = true;
+    vendorSet.add(vendor);
+  }
+  console.log(vendorSet);
+}
+
