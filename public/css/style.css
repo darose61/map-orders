@@ -3,21 +3,26 @@
 /**************/
 
 body{
-	background-color: #353839;
-	color: #79B4C6;
+	background-color: #10222B;
+	color: #eee;
 }
 
 h1 {
-	color: #89CBDF;
+	color: #95AB63;
+}
+
+h2 {
+	color: #95AB63;
 }
 
 #selectVendor {
 	padding: 10px;
 	height: 30px;
 	border-radius: 0px;
-	background-color: #3B5760;
-	color: #fff;
+	background-color: #BDD684;
+	color: #000;
 	margin-bottom: 20px;
+	border: none;
 
 }
 
@@ -31,7 +36,7 @@ h1 {
 }
 
 .buttonedt {
-	background-color: #008E8F;
+	background-color: #23990E;
 	color: #eee;
 	border: none;
 	border-radius: 2px;
