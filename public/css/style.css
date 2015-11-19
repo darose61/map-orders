@@ -12,7 +12,16 @@ h1 {
 }
 
 h2 {
-	color: #95AB63;
+	color: #10222B;
+}
+
+#header {
+	background-color: #BDD684;
+}
+
+#header h1{
+	color: #10222B;
+	padding-left: 100px;
 }
 
 #selectVendor {
