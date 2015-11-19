@@ -4,18 +4,18 @@
 
 body{
 	background-color: #353839;
-	color: #878787;
+	color: ##79B4C6;
 }
 
 h1 {
-	color: #7EC79B;
+	color: #89CBDF;
 }
 
 #selectVendor {
 	padding: 10px;
 	height: 30px;
 	border-radius: 0px;
-	background-color: #7EC79B;
+	background-color: ##3B5760;
 	color: #fff;
 	margin-bottom: 20px;
 
