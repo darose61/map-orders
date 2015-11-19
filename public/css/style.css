@@ -11,6 +11,15 @@ h1 {
 	color: #7EC79B;
 }
 
+#selectVendor {
+	padding: 10px;
+	border-radius: 0px;
+	background-color: #878787;
+	color: #fff;
+	margin-bottom: 10px;
+
+}
+
 .buttondlt {
 	background-color: #FF4524;
 	color: #eee;
